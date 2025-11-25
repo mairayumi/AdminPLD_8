@@ -1,0 +1,51 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using waPLD_8.Models.Shared;
+using waPLD_8.Models.ARMOR;
+using waPLD_8.Extesion;
+using System.Xml.Linq;
+using Microsoft.AspNetCore.Authorization;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace waPLD_8.Controllers
+{
+    //[Authorize(Roles = "User")]
+    [Route("api/[controller]")]
+    [ApiController]
+    [Authorize]
+    public class Datos_DomiciliosController : ControllerBase
+    {
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Get()
+        {
+            Respuesta respuesta = new Respuesta();
+            respuesta.exito = 1;
+            respuesta.mensaje = "Sitio Operando Adecuadamente";
+            return Ok(respuesta);
+        }
+
+        // POST api/<Personas_RelacionadasOutController>/{DbName}
+        //[Authorize(Roles = "User")]
+        //[AllowAnonymous]
+        [HttpPost("{DBName}")] //Pide el valor Nombrado
+        [AllowAnonymous]
+        public IActionResult Post([FromBody] IList<Datos_Domicilios> value, string DBName)
+        {
+            Respuesta respuesta = new Respuesta();
+            try
+            {
+                respuesta = value.CreateLocal("adswPolonia", "dbKYC_TP_" + DBName);
+            }
+            catch (Exception ex)
+            {
+                respuesta.exito = 0;
+                respuesta.mensaje = ex.Message;
+                return BadRequest(respuesta);
+            }
+            return Ok(respuesta);
+        }
+
+    }
+}
