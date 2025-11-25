@@ -1,0 +1,336 @@
+﻿@using wsPLD_8.Models.Catalogos
+@using wsPLD_8.Models.Shared
+@using wsPLD_8.Extesion;
+@inject Aplicacion<int> _aplicacion
+@inject IHttpContextAccessor HttpContextAccessor
+@model IEnumerable<TicketARMOR>
+@{
+    string sAplicacion = HttpContextAccessor.HttpContext.Session.GetString("Aplicacion");
+    if (sAplicacion != null)
+    {
+        _aplicacion = _aplicacion.Deserializar(sAplicacion);
+    }
+    var @sStyle = "";
+}
+<link href="~/lib/bootstrap/dist/css/bootstrap.mio.css" rel="stylesheet" />
+@if (_aplicacion.catalogo.mensaje != null)
+{
+    sStyle = "disabled";
+    Html.RenderPartial("_Modal", _aplicacion.catalogo.mensaje);
+    _aplicacion.catalogo.mensaje = null;
+}
+else
+{
+    Html.RenderPartial("_Modal", "");
+}
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        @{
+            int cTLS_Id = _aplicacion.UsrId
+            , PagAct = _aplicacion.PagAct;
+            string filtro = _aplicacion.Filtro
+            , periodo = _aplicacion.Periodo;
+
+            @Html.HiddenFor(model => _aplicacion.UsrId);
+            @Html.HiddenFor(PagAct => _aplicacion.PagAct);
+            @Html.HiddenFor(Filtro => _aplicacion.Filtro);
+            @Html.HiddenFor(Periodo => _aplicacion.Periodo);
+        }
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-outline">
+                    <div class="card-header card-primary card-outline">
+                        <!-- form group -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form class="form-inline">
+                                    <div class="float-end d-none d-sm-inline">
+                                        <a class="btn btn-outline-warning btn-sm" href="~/Home/Listado" alt="Listado">
+                                            <i class="fas fa-eraser"></i>
+                                        </a>
+                                        <a class="btn btn-outline-primary btn-sm" href="~/Home/Create?cTLS_Id=@_aplicacion.UsrId&PagAct=@_aplicacion.PagAct&Filtro=@_aplicacion.Filtro" alt="Create">
+                                            <i class="fas fa-address-card"></i>
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="tableEdit" class="table table-bordered table-hover table-sm">
+                            <thead class="bg_primary">
+                                <tr>
+                                    <th class="col-md-1">
+                                        @Html.DisplayNameFor(model => model.cTKA_Id)
+                                    </th>
+                                    <th class="col-md-2">
+                                        @Html.DisplayNameFor(model => model.cTKA_FechaCreado)
+                                    </th>
+                                    @if (Model.Count() > 0 && Model.First().actividades?.Count > 0)
+                                    {
+                                        <th class="col-md-5">
+                                            @Html.DisplayNameFor(model => model.cTKA_Asunto)
+                                        </th>
+                                        <th class="col-md-1">
+                                            @Html.DisplayNameFor(model => model.estadoSolicitud)
+                                        </th>
+                                        <th class="col-md-1">
+                                            @Html.DisplayNameFor(model => model.categoria)
+                                        </th>
+                                        <th class="col-md-1">
+                                            @Html.DisplayNameFor(model => model.cTKA_DependeDe)
+                                        </th>
+                                        <th class="col-md-1"></th>
+                                    }
+                                    else
+                                    {
+                                        <th class="col-md-7">
+                                            @Html.DisplayNameFor(model => model.cTKA_Asunto)
+                                        </th>
+                                        <th class="col-md-1">
+                                            @Html.DisplayNameFor(model => model.estadoSolicitud)
+                                        </th>
+                                        <th class="col-md-1"></th>
+                                    }
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Count() > 0)
+                                {
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr style="border: 6px solid @item.estadoSolicitud.First().bgColor">
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.cTKA_Id)                 .
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.cTKA_FechaCreado)
+                                            </td>
+                                            <td>
+                                                @if (@item.actividades?.Count() == 0)
+                                                {
+                                                    <a class="btn btn-outline-secondary btn-sm" href="/Usuarios/GetDetalles?id=@item.cTKA_Id&name=@item.cTKA_Asunto">
+                                                        <img src="/dist/img/usr-@item.cTKA_Id-128x128.jpg" class="img-circle foto" alt="User Image">
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a class="btn btn-outline-secondary btn-sm verDetalles" data-id=@(string.Concat(item.cTLS_Id, '-', item.cTKA_Id))>
+                                                        <i class="fas fa-solid fa-list-ol">
+                                                        </i>
+                                                    </a>
+                                                }
+                                                @Html.DisplayFor(model => item.cTKA_Asunto)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => item.estadoSolicitud.First().cESO_Descripcion)
+                                            </td>
+                                            @if (@item.actividades?.Count() > 0)
+                                            {
+                                                <td>
+                                                    @if (@item.categoria?.Count() > 0)
+                                                    {
+                                                        @Html.DisplayFor(model => item.categoria.First().cCAT_Descripcion)
+                                                    }
+                                                </td>
+                                            }
+                                            <th class="col-md-1">
+                                                @Html.DisplayFor(model => item.cTKA_DependeDe)
+                                            </th>
+                                            <td class="col-sm-1">
+                                                <a class="btn btn-outline-primary btn-sm" href="/Home/Details?cTLS_Id=@_aplicacion.UsrId&Pagact=@_aplicacion.PagAct&id=@item.cTKA_Id&filtro=@_aplicacion.Filtro">
+                                                    <i class="fas fa-eye">
+                                                    </i>
+                                                </a>
+                                                <a class="btn btn-outline-info btn-sm" href="/Home/Edit?cTLS_Id=@_aplicacion.UsrId&id=@item.cTKA_Id&Pagact=@_aplicacion.PagAct&filtro=@_aplicacion.Filtro">
+                                                    <i class="fas fa-pencil-alt">
+                                                    </i>
+                                                </a>
+                                                <a class="btn btn-outline-danger btn-sm" href="/Home/Delete?cTLS_Id=@_aplicacion.UsrId&id=@item.cTKA_Id&Pagact=@_aplicacion.PagAct&id=@item.cTKA_Id&filtro=@_aplicacion.Filtro">
+                                                    <i class="fas fa-trash">
+                                                    </i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        string sActividad = "none";
+                                        if (_aplicacion.cTKA_Id.Equals(item.cTKA_Id))
+                                            sActividad = "show";
+
+                                        <tr style="display:@sActividad;" id="detalle-@(item.cTLS_Id)-@(item.cTKA_Id)">
+                                            <td>
+                                            </td>
+                                            <td colspan="6">
+                                                <table class="table table-stripedIn table-bordered table-hover table-sm">
+                                                    <tbody>
+                                                        @if (Model != null)
+                                                        {
+                                                            int intPos = 1;
+                                                            @foreach (var itemIn in item.actividades)
+                                                            {
+                                                                <tr id="actividad-@(string.Concat(itemIn.cTLS_Id, '-', itemIn.cTKA_Id, '-', itemIn.rTKA_Id))" style="border: 6px solid @itemIn.estadoActividad.First().bgColor">
+                                                                    <td class="col-sm-1">
+                                                                        @Html.DisplayFor(modelItem => itemIn.rTKA_Id)
+                                                                    </td>
+                                                                    @if (intPos == 1 || item.cTKA_Id.Equals(0))
+                                                                    {
+                                                                        DateOnly Fechas = @DateOnly.Parse(DateTime.Now.ToString("dd/MM/yyyy"));
+                                                                        if (itemIn.rTKA_FechaSeguimiento != null)
+                                                                            Fechas = @DateOnly.Parse(itemIn.rTKA_FechaSeguimiento);
+                                                                        <td colspan="8">
+                                                                            <textarea class="form-control Actividad form-control-sm" rows="3">@itemIn.rTKA_Actividad</textarea>
+                                                                        </td>
+                                                                        <td class="col-sm-1">
+                                                                            <div class="form-group">
+                                                                                <label asp-for="@itemIn.tipoActividad" class="control-label bg-light"></label>
+                                                                                <select asp-items="@(new SelectList(_aplicacion.catalogo.catalogosTicketARMOR[0].tipoActividad, "cTAC_Id", "cTAC_Descripcion"))" asp-for="@itemIn.cTAC_Id" class="form-control form-control-sm"></select>
+                                                                                <span asp-validation-for="@itemIn.cTAC_Id" class="text-danger"></span>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="col-sm-1">
+                                                                            <div class="form-group">
+                                                                                <label asp-for="@itemIn.estadoActividad" class="control-label bg-light"></label>
+                                                                                <select asp-items="@(new SelectList(_aplicacion.catalogo.catalogosTicketARMOR[0].estadoActividad, "cEAC_Id", "cEAC_Descripcion"))" asp-for="@itemIn.cEAC_Id" class="form-control form-control-sm"></select>
+                                                                                <span asp-validation-for="@itemIn.cEAC_Id" class="text-danger"></span>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="col-sm-1">
+                                                                            <div class="form-group">
+                                                                                <label asp-for="@itemIn.responsable" class="control-label bg-light"></label>
+                                                                                <select asp-items="@(new SelectList(_aplicacion.catalogo.catalogosTicketARMOR[0].responsable, "UsrId", "UserName"))" asp-for="@itemIn.UsrId" class="form-control form-control-sm"></select>
+                                                                                <span asp-validation-for="@itemIn.UsrId" class="text-danger"></span>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="col-sm-1">
+                                                                            <div class="input-group">
+                                                                                <button name="Update" class="btn btn-outline-info btn-sm saveBtn" data-id="@(string.Concat(itemIn.cTLS_Id, '-', itemIn.cTKA_Id, '-', itemIn.rTKA_Id))"><i class="fas fa-check"></i></button>
+                                                                                @if (!item.cTKA_Id.Equals(0))
+                                                                                {
+                                                                                    <button name="Create" class="btn btn-outline-primary btn-sm saveBtn" data-id="@(string.Concat(itemIn.cTLS_Id, '-', itemIn.cTKA_Id, '-', itemIn.rTKA_Id))"><i class="fas fa-plus"></i></button>
+                                                                                }
+                                                                                <button name="Delete" class="btn btn-outline-danger btn-sm saveBtn" data-id="@(string.Concat(itemIn.cTLS_Id, '-', itemIn.cTKA_Id, '-', itemIn.rTKA_Id))"><i class="fas fa-trash"></i></button>
+                                                                            </div>
+                                                                            <input type="text" class="form-control Datepicker" value="@Fechas" />
+                                                                        </td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td colspan="8">
+                                                                            @Html.DisplayFor(modelItem => itemIn.rTKA_Actividad)
+                                                                        </td>
+                                                                        <td class="col-sm-1">
+                                                                            @Html.DisplayFor(modelItem => itemIn.tipoActividad.First().cTAC_Descripcion)
+                                                                        </td>
+                                                                        <td class="col-sm-1">
+                                                                            @Html.DisplayFor(modelItem => itemIn.estadoActividad.First().cEAC_Descripcion)
+                                                                        </td>
+                                                                        <td class="col-sm-1">
+                                                                            @Html.DisplayFor(modelItem => itemIn.responsable.First().UserName)
+                                                                        </td>
+                                                                        <td class="col-sm-1">
+                                                                            @Html.DisplayFor(modelItem => itemIn.rTKA_FechaSeguimiento)
+                                                                        </td>
+                                                                    }
+                                                                </tr>
+                                                                intPos += 1;
+                                                            }
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer clearfix">
+                        <div class="float-end d-none d-sm-inline">
+                            <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                @if (Model.Count() > 0)
+                                {
+                                    int PagIni = PagAct - 1;
+                                    int PagFin = PagAct + 1;
+                                    int PagTotal = Model.First().NoPagina;
+
+                                    if (PagIni == 0)
+                                    {
+                                        PagIni = 1;
+                                    }
+                                    if (PagFin > PagTotal)
+                                    {
+                                        PagFin = PagTotal;
+                                    }
+
+                                    <li class="page-item"><a class="page-link" href="/Home/Listado?cTLS_Id=@_aplicacion.UsrId&Pagact=@PagIni&Filtro=@filtro&Periodo=@periodo">&laquo;</a></li>
+                                    if (PagFin > 3)
+                                    {
+                                        <li class="page-item"><a class="page-link" href="/Home/Listado?cTLS_Id=@_aplicacion.UsrId&Pagact=1&Filtro=@filtro&Periodo=@periodo">1</a></li>
+                                        if (PagIni > 1)
+                                        {
+                                            <li class="page-item">...</li>
+                                        }
+                                    }
+
+                                    @for (int i = PagIni; i <= PagFin; i++)
+                                    {
+                                        var nombre = "";
+                                        if (i == PagAct) { nombre = "active"; }
+                                                                    ;
+                                        <li class="page-item @nombre">
+                                            <a class="page-link" href="/Home/Listado?cTLS_Id=@_aplicacion.UsrId&Pagact=@i&Filtro=@filtro&Periodo=@periodo">@i</a>
+                                        </li>
+                                    }
+
+                                    if (PagTotal > PagFin)
+                                    {
+                                        if (PagTotal > 3)
+                                        {
+                                            <li class="page-item">...</li>
+                                        }
+                                        <li class="page-item"><a class="page-link" href="/Home/Listado?cTLS_Id=@_aplicacion.UsrId&Pagact=@PagTotal&Filtro=@filtro&Periodo=@periodo">@PagTotal</a></li>
+                                    }
+                                    <li class="page-item"><a class="page-link" href="/Home/Listado?cTLS_Id=@_aplicacion.UsrId&Pagact=@PagFin&Filtro=@filtro&Periodo=@periodo">&raquo;</a></li>
+                                }
+                            </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- InputMask -->
+<script src="~/plugins/moment/moment-with-locales.min.js"></script>
+<script src="~/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="~/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- date-range-picker -->
+<script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Page specific script -->
+<script src="~/dist/js/reservationtime.js"></script>
+<!-- Page specific script -->
+<script src="~/dist/js/Proceso.js"></script>
+<!-- Comportamiento -->
+<script src="~/dist/js/ajuste.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (@sStyle.Length>0)
+        {
+            $('#modalExito').modal('show')
+        }
+    });
+</script>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

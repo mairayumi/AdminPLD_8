@@ -1,0 +1,201 @@
+﻿@using System.Collections.Generic;
+@using wsPLD_8.Extesion;
+@using wsPLD_8.Models.Shared
+@inject Aplicacion<int> _aplicacion
+@model wsPLD_8.Models.Catalogos.EncOficio
+@{
+    var @sStyle = "";
+}
+<link href="~/lib/bootstrap/dist/css/bootstrap.mio.css" rel="stylesheet" />
+@if (_aplicacion.catalogo.mensaje != null)
+{
+    sStyle = "disabled";
+    Html.RenderPartial("_Modal", _aplicacion.catalogo.mensaje);
+    _aplicacion.catalogo.mensaje = null;
+}
+else
+{
+    Html.RenderPartial("_Modal", "");
+}
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        @{
+            int cTLS_Id = _aplicacion.UsrId
+            , PagAct = Model.PagAct;
+            string filtro = _aplicacion.Filtro;
+
+
+            @Html.HiddenFor(model => _aplicacion.UsrId)
+            ;
+            @Html.HiddenFor(model => _aplicacion.catalogo.mensaje)
+            ;
+            @Html.HiddenFor(PagAct => _aplicacion.PagAct)
+            ;
+            @Html.HiddenFor(Filtro => _aplicacion.Filtro)
+            ;
+        }
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-outline">
+                    <div class="card-header card-primary card-outline">
+                        <!-- form group -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form class="form-inline">
+                                    <div class="float-end d-none d-sm-inline">
+                                        <a class="btn btn-outline-warning btn-sm" href="~/Home/Listado" alt="Listado">
+                                            <i class="fas fa-eraser"></i>
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="tableEdit1" class="table table-striped table-bordered table-hover table-sm">
+                            <thead class="bg-primary">
+                                <tr>
+                                    <th colspan="2" style="color: white !important;">
+                                        @Html.DisplayNameFor(model => model.Oficios.First().NombreOficio)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Oficios.Count() > 0)
+                                {
+                                    @foreach (var item in Model.Oficios)
+                                    {
+                                        <tr>
+                                            <!---->
+                                            <td colspan="2" style="border:@item.bgColor">
+                                                @if (@item.Nombres?.Count() > 0)
+                                                {
+                                                    <a class="btn btn-outline-secondary btn-sm verOficioDetalles" data-id=@(item.NombreOficio.Replace("/", "").Replace(" ", "").Replace(" ", "").Replace(":", "").Replace("-", ""))>
+                                                        <i class="fas fa-solid fa-list-ol">
+                                                        </i>
+                                                    </a>
+                                                }
+                                                @Html.DisplayFor(model => item.NombreOficio)
+                                            </td>
+                                        </tr>
+                                        <tr style="display:none;" id="detalle-@(item.NombreOficio.Replace("/", "").Replace(" ", "").Replace(" ", "").Replace(":", "").Replace("-", ""))">
+                                            <td>
+                                            </td>
+                                            <td>
+                                                <table class="table table-stripedIn table-bordered table-hover table-sm">
+                                                    <tbody>
+                                                        @if (Model != null)
+                                                        {
+                                                            @foreach (var itemIn in item.Nombres)
+                                                            {
+                                                                <tr style="border:@itemIn.bgColor">
+                                                                    <td class="col-sm-1">
+                                                                        @Html.DisplayFor(modelItem => itemIn.Nombre)
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer clearfix">
+                        <div class="float-end d-none d-sm-inline">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    @if (Model.Oficios.Count() > 0)
+                                    {
+                                        int PagIni = PagAct - 1;
+                                        int PagFin = PagAct + 1;
+                                        int PagTotal = Model.TotalPag;
+
+                                        if (PagIni == 0)
+                                        {
+                                            PagIni = 1;
+                                        }
+                                        if (PagFin > PagTotal)
+                                        {
+                                            PagFin = PagTotal;
+                                        }     
+                                        
+                                        <li class="page-item"><a class="page-link" href="/Oficios?Id=@Model.lOFD_Id&Año=@Model.lOFD_Año&Tipo=@Model.lOFD_Tipo&PagAct=@PagIni">&laquo;</a></li>
+                                        if (PagFin > 3)
+                                        {
+                                            <li class="page-item"><a class="page-link" href="/Oficios?Id=@Model.lOFD_Id&Año=@Model.lOFD_Año&Tipo=@Model.lOFD_Tipo&PagAct=1">1</a></li>
+                                            if (PagIni > 1)
+                                            {
+                                                <li class="page-item">...</li>
+                                            }
+                                        }
+
+                                        @for (int i = PagIni; i <= PagFin; i++)
+                                        {
+                                            var nombre = "";
+                                            if (i == PagAct) { nombre = "active"; }
+                                                                            ;
+                                            <li class="page-item @nombre">
+                                                <a class="page-link" href="/Oficios?Id=@Model.lOFD_Id&Año=@Model.lOFD_Año&Tipo=@Model.lOFD_Tipo&PagAct=@i">@i</a>
+                                            </li>
+                                        }
+
+                                        if (PagTotal > PagFin)
+                                        {
+                                            if (PagTotal > 3)
+                                            {
+                                                <li class="page-item">...</li>
+                                            }
+                                            <li class="page-item"><a class="page-link" href="/Oficios?Id=@Model.lOFD_Id&Año=@Model.lOFD_Año&Tipo=@Model.lOFD_Tipo&PagAct=@PagTotal">@PagTotal</a></li>
+                                        }
+                                        <li class="page-item"><a class="page-link" href="/Oficios?Id=@Model.lOFD_Id&Año=@Model.lOFD_Año&Tipo=@Model.lOFD_Tipo&PagAct=@PagFin">&raquo;</a></li>
+                                    }
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- InputMask -->
+<script src="~/plugins/moment/moment-with-locales.min.js"></script>
+<script src="~/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="~/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- date-range-picker -->
+<script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Page specific script -->
+<script src="~/dist/js/reservationtime.js"></script>
+<!-- Page specific script -->
+<script src="~/dist/js/Proceso.js"></script>
+<!-- Comportamiento -->
+<script src="~/dist/js/ajuste.js"></script>
+<!--
+<-- Incluir jQuery --
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<-- Incluir jQuery UI JS --
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (@sStyle.Length>0)
+        {
+            $('#modalExito').modal('show')
+        }
+    });
+</script>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

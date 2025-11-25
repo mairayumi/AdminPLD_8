@@ -1,0 +1,300 @@
+﻿@using wsPLD_8.Models.Shared;
+@using wsPLD_8.Extesion;
+@using System;
+@inject Aplicacion<int> _aplicacion
+@model wsPLD_8.Models.Catalogos.TicketARMOR
+@{
+}
+<!-- Tempusdominus Bootstrap 4 -->
+<div class="col-md-12">
+    <form asp-action="CreateReturn" asp-route-PagAct="@_aplicacion.PagAct" asp-route-Filtro="@_aplicacion.Filtro" method="post">
+        @Html.HiddenFor(model => model.cTLS_Id)
+        @Html.HiddenFor(model => model.cTKA_Id)
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="card card-primary mb-3" id="miTarjeta">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <span><i class="far fa-user"></i></span>
+                    Identificación
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <label asp-for="@Model.cTKA_Id" class="form-label fw-bold col-sm-1"></label>
+                    <div class="col-sm-11">
+                        <input asp-for="@Model.cTKA_Id" class="form-control form-control-sm" readonly="readonly" disabled="disabled" />
+                        <span asp-validation-for="@Model.cTKA_Id" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card card-primary card-outline mb-3" id="miTarjeta">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <span><i class="far fa-user"></i></span>
+                    Identificación
+                </h3>
+            </div>
+            <div class="card-body">
+                <fieldset @Model.Accion>
+                    <div class="row g-3">
+                        <div class="col-md-2">
+                            <label asp-for="@Model.cTKA_FechaCreado" class="form-label fw-bold"></label>
+                            <div class="input-group has-validation">
+                                <input type="text"
+                                       class="form-control form-control-sm"
+                                       id="cTKA_FechaCreado"
+                                       value="@DateTime.Parse(@Model.cTKA_FechaCreado)"
+                                       aria-describedby="inputGroupPrepend"
+                                       disabled="disabled" />
+                                <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-calendar"></i></span>
+                                <span asp-validation-for="@Model.cTKA_FechaCreado" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+                        @{
+                            var Fechas = "";
+                            if (Model.cTKA_FechaSeguimiento != null)
+                                Fechas = DateOnly.Parse(Model.cTKA_FechaSeguimiento).ToString();
+                        }
+                        <div class="col-md-2">
+                            <label asp-for="@Model.cTKA_FechaSeguimiento" class="form-label fw-bold"></label>
+                            <div class="input-group has-validation">
+                                <input asp-for="@Model.cTKA_FechaSeguimiento" class="form-control form-control-sm" value="@Fechas" />
+                                <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-calendar"></i></span>
+                                <span asp-validation-for="@Model.cTKA_FechaSeguimiento" class="text-danger"></span>
+                            </div>
+                        </div>
+                        @{
+                            Fechas = "";
+                            if (Model.cTKA_FechaSolucion != null)
+                                Fechas = DateOnly.Parse(Model.cTKA_FechaSolucion).ToString();
+                        }
+                        <div class="col-md-2">
+                            <label asp-for="@Model.cTKA_FechaSolucion" class="form-label fw-bold"></label>
+                            <div class="input-group has-validation">
+                                <input asp-for="@Model.cTKA_FechaSolucion" class="form-control form-control-sm" value="@Fechas" />
+                                <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-calendar"></i></span>
+                                <span asp-validation-for="@Model.cTKA_FechaSolucion" class="text-danger"></span>
+                            </div>
+                        </div>
+                        @{
+                            Fechas = "";
+                            if (Model.cTKA_FechaSolucionReal != null)
+                                Fechas = DateOnly.Parse(Model.cTKA_FechaSolucionReal).ToString();
+                        }
+                        <div class="col-md-2">
+                            <label asp-for="@Model.cTKA_FechaSolucionReal" class="form-label fw-bold"></label>
+                            <div class="input-group has-validation">
+                                <input asp-for="@Model.cTKA_FechaSolucionReal" class="form-control form-control-sm" value="@Fechas" />
+                                <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-calendar"></i></span>
+                                <span asp-validation-for="@Model.cTKA_FechaSolucionReal" class="text-danger"></span>
+                            </div>
+                        </div>
+                        @{
+                            Fechas = "";
+                            if (Model.cTKA_FechaPruebas != null)
+                                Fechas = DateOnly.Parse(Model.cTKA_FechaPruebas).ToString();
+                        }
+                        <div class="col-md-2">
+                            <label asp-for="@Model.cTKA_FechaPruebas" class="form-label fw-bold"></label>
+                            <div class="input-group has-validation">
+                                <input asp-for="@Model.cTKA_FechaPruebas" class="form-control form-control-sm" value="@Fechas" />
+                                <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-calendar"></i></span>
+                                <span asp-validation-for="@Model.cTKA_FechaPruebas" class="text-danger"></span>
+                            </div>
+                        </div>
+                        @{
+                            Fechas = "";
+                            if (Model.cTKA_FechaDespliegue != null)
+                                Fechas = DateOnly.Parse(Model.cTKA_FechaDespliegue).ToString();
+                        }
+                        <div class="col-md-2">
+                            <label asp-for="@Model.cTKA_FechaDespliegue" class="form-label fw-bold"></label>
+                            <div class="input-group has-validation">
+                                <input asp-for="@Model.cTKA_FechaDespliegue" class="form-control form-control-sm" value="@Fechas" />
+                                <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-calendar"></i></span>
+                                <span asp-validation-for="@Model.cTKA_FechaDespliegue" class="text-danger"></span>
+                            </div>
+                        </div>
+                        @{
+                            Fechas = "";
+                            if (Model.cTKA_FechaPruebasProd != null)
+                                Fechas = DateOnly.Parse(Model.cTKA_FechaPruebasProd).ToString();
+                        }
+                        <div class="col-md-2">
+                            <label asp-for="@Model.cTKA_FechaPruebasProd" class="form-label fw-bold"></label>
+                            <div class="input-group has-validation">
+                                <input asp-for="@Model.cTKA_FechaPruebasProd" class="form-control form-control-sm" value="@Fechas" />
+                                <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-calendar"></i></span>
+                                <span asp-validation-for="@Model.cTKA_FechaPruebasProd" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label asp-for="@Model.cTKA_TicketPatria" class="form-label fw-bold"></label>
+                            <div class="input-group has-validation">
+                                <input asp-for="@Model.cTKA_TicketPatria" class="form-control form-control-sm" />
+                                <span asp-validation-for="@Model.cTKA_TicketPatria" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label asp-for="@Model.cTKA_TicketSalud" class="form-label fw-bold"></label>
+                            <div class="input-group has-validation">
+                                <input asp-for="@Model.cTKA_TicketSalud" class="form-control form-control-sm" />
+                                <span asp-validation-for="@Model.cTKA_TicketSalud" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label asp-for="@Model.cTKA_TicketSeguros" class="form-label fw-bold"></label>
+                            <div class="input-group has-validation">
+                                <input asp-for="@Model.cTKA_TicketSeguros" class="form-control form-control-sm" />
+                                <span asp-validation-for="@Model.cTKA_TicketSeguros" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label asp-for="categoria" class="form-label fw-bold"></label>
+                            <div class="input-group has-validation">
+                                <select asp-items="@(new SelectList(_aplicacion.catalogo.catalogosTicketARMOR[0].categoria, "cCAT_Id", "cCAT_Descripcion"))"
+                                        asp-for="cCAT_Id" required class="form-select form-control-sm"></select>
+                                <span asp-validation-for="categoria" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="prioridad" class="form-label fw-bold"></label>
+                            <div class="input-group has-validation">
+                                <select asp-items="@(new SelectList(_aplicacion.catalogo.catalogosTicketARMOR[0].prioridad, "cPRI_Id", "cPRI_Descripcion"))"
+                                        asp-for="cPRI_Id" required class="form-select form-control-sm"></select>
+                                <span asp-validation-for="prioridad" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="cTKA_Asunto" class="form-label fw-bold"></label>
+                            <div class="input-group has-validation">
+                                <input asp-for="cTKA_Asunto" class="form-control form-control-sm" />
+                                <span asp-validation-for="cTKA_Asunto" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label asp-for="tipoSolicitud" class="form-label fw-bold"></label>
+                            <div class="input-group has-validation">
+                                <select asp-items="@(new SelectList(_aplicacion.catalogo.catalogosTicketARMOR[0].tipoSolicitud, "cTIS_Id", "cTIS_Descripcion"))"
+                                        asp-for="cTIS_Id" class="form-select form-control-sm"></select>
+                                <span asp-validation-for="tipoSolicitud" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="estadoSolicitud" class="form-label fw-bold"></label>
+                            <div class="input-group has-validation">
+                                <select asp-items="@(new SelectList(_aplicacion.catalogo.catalogosTicketARMOR[0].estadoSolicitud, "cESO_Id", "cESO_Descripcion"))"
+                                        asp-for="cESO_Id" class="form-select form-control-sm"></select>
+                                <span asp-validation-for="estadoSolicitud" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="cTKA_EstatusSpot" class="form-label fw-bold"></label>
+                            <div class="input-group has-validation">
+                                <input asp-for="cTKA_EstatusSpot" class="form-control form-control-sm" />
+                                <span asp-validation-for="cTKA_EstatusSpot" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="cTKA_DependeDe" class="form-label fw-bold"></label>
+                            <div class="input-group has-validation">
+                                <input asp-for="cTKA_DependeDe" class="form-control form-control-sm" />
+                                <span asp-validation-for="cTKA_DependeDe" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+                        <table id="tableEdit1" class="table table-stripedIn table-bordered table-hover table-sm">
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    @foreach (var itemIn in @Model.actividades)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => itemIn.rTKA_Id)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => itemIn.rTKA_Actividad)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => itemIn.rTKA_FechaSeguimiento)
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+
+                            <label asp-for="cTKA_SeccionSubAplicacion" class="form-label fw-bold"></label>
+                            <div class="input-group has-validation">
+                                <input asp-for="cTKA_SeccionSubAplicacion" class="form-control form-control-sm" />
+                                <span asp-validation-for="cTKA_SeccionSubAplicacion" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label asp-for="cTKA_UsuarioAfectado" class="form-label fw-bold"></label>
+                            <div class="input-group has-validation">
+                                <input asp-for="cTKA_UsuarioAfectado" class="form-control form-control-sm" />
+                                <span asp-validation-for="cTKA_UsuarioAfectado" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label asp-for="cTKA_Observaciones" class="form-label fw-bold"></label>
+                            <div class="input-group has-validation">
+                                <textarea class="form-control form-control-sm" rows="3" name="cTKA_Observaciones">@Model.cTKA_Observaciones</textarea>
+                                <span asp-validation-for="cTKA_Observaciones" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </div>
+            <div class="card-footer">
+                <div class="float-end d-none d-sm-inline">
+                    @if (_aplicacion.Titulo != null && !_aplicacion.Titulo.Contains("Detalle"))
+                    {
+                        <button type="submit" class="btn btn-success btn-sm">
+                            <i class="fas fa-check">
+                            </i>
+                        </button>
+                    }
+                    <a class="btn btn-secondary btn-sm" href="/Home/Cancel?cTLS_Id=@_aplicacion.UsrId&Pagact=@_aplicacion.PagAct&filtro=@_aplicacion.Filtro">
+                        @* <i class="fas fa-window-close"> *@
+                        <i class="fas fa-times">
+                        </i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
