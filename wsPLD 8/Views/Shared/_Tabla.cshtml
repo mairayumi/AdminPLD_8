@@ -92,7 +92,7 @@ else
                                         <th class="col-md-1">
                                             @Html.DisplayNameFor(model => model.estadoSolicitud)
                                         </th>
-                                        <th class="col-md-1"></th>
+                                        <th class="col-md-2"></th>
                                     }
 
                                 </tr>
@@ -112,8 +112,8 @@ else
                                             <td>
                                                 @if (@item.actividades?.Count() == 0)
                                                 {
-                                                    <a class="btn btn-outline-secondary btn-sm" href="/Usuarios/GetDetalles?id=@item.cTKA_Id&name=@item.cTKA_Asunto">
-                                                        <img src="/dist/img/usr-@item.cTKA_Id-128x128.jpg" class="img-circle foto" alt="User Image">
+                                                    <a class="btn btn-outline-secondary btn-sm" href="/Home/GetDetalles?id=@item.cTKA_Id&name=@item.cTKA_Asunto">
+                                                        <img src="/dist/assets/img/usr-@item.cTKA_Id-128x128.jpg" class="img-circle foto" alt="User Image">
                                                     </a>
                                                 }
                                                 else

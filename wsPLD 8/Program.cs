@@ -9,6 +9,22 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
+// Autenticación GOOGLE
+//builder.Services.AddAuthentication(options =>
+//{
+//    options.DefaultAuthenticateScheme = "Cookies";
+//    options.DefaultSignInScheme = "Cookies";
+//    options.DefaultChallengeScheme = "Google";
+//})
+//.AddCookie("Cookies")
+//.AddGoogle(options =>
+//{
+//    options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+//    options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+//});
+// FIN GOOGLE
+
+
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
@@ -50,7 +66,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseSession(); // <-- DEBE ir antes de MapControllers / MapRazorPages
+app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapDefaultControllerRoute();
 
 app.MapControllerRoute(
     name: "default",

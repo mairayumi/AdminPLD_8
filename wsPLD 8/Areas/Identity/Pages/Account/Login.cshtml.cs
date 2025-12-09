@@ -164,6 +164,7 @@ namespace wsPLD_8.Areas.Identity.Pages.Account
                             "<H1>" + contraseña + "</H1>");
                         _aplicacion.UsrMessage = "La contraseña se recibe por correo";
                         _aplicacion.UsrPassword = contraseña;
+                        _aplicacion.Id = User.Result.UsrId;
                         _aplicacion.UsrId = User.Result.UsrId;
                         _aplicacion.NormalizedUsrName = User.Result.NormalizedUserName;
                         _aplicacion.UsrName = User.Result.UserName;

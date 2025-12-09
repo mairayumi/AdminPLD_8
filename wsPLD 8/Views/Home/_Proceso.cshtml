@@ -4,6 +4,7 @@
 @inject Aplicacion<int> _aplicacion
 @model wsPLD_8.Models.Catalogos.TicketARMOR
 @{
+    _aplicacion.UsrId = Model.cTLS_Id;
 }
 <!-- Tempusdominus Bootstrap 4 -->
 <div class="col-md-12">
@@ -284,7 +285,6 @@
                         </button>
                     }
                     <a class="btn btn-secondary btn-sm" href="/Home/Cancel?cTLS_Id=@_aplicacion.UsrId&Pagact=@_aplicacion.PagAct&filtro=@_aplicacion.Filtro">
-                        @* <i class="fas fa-window-close"> *@
                         <i class="fas fa-times">
                         </i>
                     </a>

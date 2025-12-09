@@ -289,9 +289,38 @@ namespace wsPLD_8.Controllers
         {
             _aplicacion.UsrId = Id;
             _aplicacion.UsrImg = "usr-" + Id + "-128x128.jpg";
-            HttpContext.Session.SetString("Aplicacion", _aplicacion.Serializar());
-            return RedirectToAction("Index");
+            
+            _aplicacion.Menu = "Matriz de Mando";
+            _aplicacion.Titulo = "Index Usuarios";
 
+            HttpContext.Session.SetString("Aplicacion", _aplicacion.Serializar());
+
+            Usuarios usuarios = new Usuarios();
+            Respuesta respuestas = usuarios.Read("-" + Id.ToString());
+            TipoLista tipoLista = new TipoLista();
+            if (respuestas.Exito == 1)
+            {
+                tipoLista = tipoLista.Deserializar(respuestas.Data.ToString());
+            }
+            return View(tipoLista.ticketARMOR);
         }
+        public ActionResult GetDetalles(int id, string name)
+        {
+            string sAplicacion = HttpContext.Session.GetString("Aplicacion");
+            if (sAplicacion != null)
+            {
+                _aplicacion = _aplicacion.Deserializar(sAplicacion);
+            }
+
+            _aplicacion.UsrId = id;
+            _aplicacion.UsrImg = "usr-" + id + "-128x128.jpg";
+            _aplicacion.NormalizedUsrName = name;
+
+            sAplicacion = _aplicacion.Serializar();
+            HttpContext.Session.SetString("Aplicacion", sAplicacion);
+            return RedirectToAction(nameof(Index));
+            //return RedirectToAction("Index", "Home");
+        }
+
     }
 }
