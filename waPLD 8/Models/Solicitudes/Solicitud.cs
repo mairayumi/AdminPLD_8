@@ -1,4 +1,7 @@
-﻿namespace waPLD_8.Models.Solicitudes
+﻿using System.Collections.Generic;
+using System.Reflection.Metadata;
+
+namespace waPLD.Models.Solicitudes
 {
     public class Solicitud
     {

@@ -1,4 +1,4 @@
-﻿namespace waPLD_8.Models.Catalogo.Usuario
+﻿namespace waPLD.Models.Catalogo.Usuario
 {
     public class MedioCont
     {

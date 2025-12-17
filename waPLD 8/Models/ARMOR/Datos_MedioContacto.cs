@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Migrations.Internal;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
-namespace waPLD_8.Models.ARMOR
+namespace waPLD.Models.ARMOR
 {
     public partial class Datos_MedioContacto
     {

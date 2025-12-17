@@ -1,7 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore.Migrations.Internal;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
-namespace waPLD_8.Models.ARMOR
+namespace waPLD.Models.ARMOR
 {
     public partial class Personas_Relacionadas
     {
@@ -41,7 +44,7 @@ namespace waPLD_8.Models.ARMOR
 
         //[StringLength(50)]
         [DataMember]
-        public string? Pais { get; set; }
+        public string? Pais { get ; set ; }
 
         //[Required(ErrorMessage = "El valor :estado es requerido")]
         [StringLength(50)]
@@ -193,4 +196,3 @@ namespace waPLD_8.Models.ARMOR
         public int? Esprod { get; set; }
     }
 }
-

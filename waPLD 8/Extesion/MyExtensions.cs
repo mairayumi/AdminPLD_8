@@ -3,16 +3,15 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
+using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using waPLD_8.Models.Shared;
-using Microsoft.Data.SqlClient;
+using waPLD.Models.Shared;
 
-
-namespace waPLD_8.Extesion
+namespace waPLD.Extesion
 {
     public static class MyExtensions
     {
@@ -108,11 +107,11 @@ namespace waPLD_8.Extesion
             return result;
         }
 
-        internal async static Task<Respuesta> Operacion<T>(this T value, string Tipo, string DataSource = null, string InitialCatalog = null)
+        internal async static Task<Respuesta> Operacion<T>(this T value, string Tipo,string DataSource=null, string InitialCatalog = null)
         {
             Respuesta respuesta = new Respuesta();
             string valor = value.GetType().Name.Replace("Service", "");
-            if (value.GetType().GenericTypeArguments.Count() > 0)
+            if (value.GetType().GenericTypeArguments.Count()>0)
             {
                 valor = value.GetType().GenericTypeArguments[0].Name;
             }
@@ -131,8 +130,7 @@ namespace waPLD_8.Extesion
                 InitialCatalog = "Accesos";
             }
 
-            if (DataSource != null)
-            {
+            if (DataSource != null) {
                 IConfigurationRoot configuration = new ConfigurationBuilder()
                            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                            .AddJsonFile("appsettings.json")
@@ -142,7 +140,7 @@ namespace waPLD_8.Extesion
                 connectString = connectString
                                     .Replace("@DataSource", DataSource)
                                     .Replace("@InitialCatalog", InitialCatalog);
-
+                connectString = connectString.Replace("Trust Server Certificate=True;", "");
             }
 
             SqlConnectionStringBuilder builder =

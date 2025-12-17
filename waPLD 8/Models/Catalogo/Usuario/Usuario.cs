@@ -1,6 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 
-namespace waPLD_8.Models.Catalogo.Usuario
+namespace waPLD.Models.Catalogo.Usuario
 {
     public class Usuario
     {
@@ -19,7 +21,7 @@ namespace waPLD_8.Models.Catalogo.Usuario
         public string? cUSR_userBD { get; set; }
         public string? cUSR_passwordBD { get; set; }
         public string? cUSR_Token { get; set; }
-
+        
 
         [DisplayName("Nombre")]
         public string cUSR_Nombre { get; set; }

@@ -1,6 +1,7 @@
-﻿using waPLD_8.Models.ARMOR;
+﻿using System.Collections.Generic;
+using System;
 
-namespace waPLD_8.Models.Bitacora
+namespace waPLD.Models.Bitacora
 {
     public class DatosGenerales
     {

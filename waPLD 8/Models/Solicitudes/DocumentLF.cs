@@ -1,8 +1,8 @@
-﻿namespace waPLD_8.Models.Solicitudes
+﻿namespace waPLD.Models.Solicitudes
 {
     public class DocumenLF
-    {
-        public string NombreArchivo { get; set; }
+   {
+        public string NombreArchivo {  get; set; }
         public string Extension { get; set; }
         public string Asunto { get; set; }
         public string S_Ticket { get; set; }

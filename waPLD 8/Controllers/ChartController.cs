@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.SignalR;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
-using waPLD_8.Models.Shared;
+using waPLD.Models.Shared;
 
-namespace waPLD_8.Controllers
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace waPLD.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

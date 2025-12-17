@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using waPLD_8.Models.Bitacora;
-namespace waPLD_8.Models.Catalogo
+using waPLD.Models.Bitacora;
+namespace waPLD.Models.Catalogo
 {
     public class Catalogo
     {

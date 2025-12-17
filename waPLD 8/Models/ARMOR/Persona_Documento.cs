@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Migrations.Internal;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
-
-namespace waPLD_8.Models.ARMOR
+namespace waPLD.Models.ARMOR
 {
     public partial class Persona_Documento
     {
@@ -63,4 +63,3 @@ namespace waPLD_8.Models.ARMOR
         public int? Esprod { get; set; }
     }
 }
-

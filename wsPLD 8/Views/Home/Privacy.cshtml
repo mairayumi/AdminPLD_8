@@ -3,4 +3,232 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Tabla con filtrado por columna - Bootstrap 5.3.8</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap 5.3.8 CSS (CDN). Sin integrity para evitar bloqueos por SRI incorrecto -->
+    <link rel="stylesheet" href="~/Css BT/bootstrap.min.css" />
+
+    <style>
+        /* Encabezado principal con color (también puedes usar .table-primary directamente) */
+        thead tr.encabezado-principal th {
+            background-color: #0d6efd; /* Primario Bootstrap */
+            color: #fff;
+            vertical-align: middle;
+        }
+
+        /* Fila de filtros */
+        thead tr.filtros th input,
+        thead tr.filtros th select {
+            width: 100%;
+            padding: .25rem .5rem;
+            font-size: .875rem;
+        }
+
+        /* Para scroll horizontal si hay muchas columnas */
+        .tabla-container {
+            overflow-x: auto;
+        }
+
+        /* Resaltar coincidencias */
+        .match-highlight {
+            background: #fff3cd;
+        }
+        /* amarillo suave */
+
+        /* Contador de resultados */
+        #contadorResultados {
+            font-size: .875rem;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container py-4">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+            <h1 class="h4 mb-0">Tabla con filtrado por columna (Bootstrap 5.3.8)</h1>
+            <div class="d-flex gap-2">
+                <button id="btnLimpiar" class="btn btn-outline-secondary btn-sm">Limpiar filtros</button>
+                <span id="contadorResultados" class="text-muted">Mostrando 0 de 0</span>
+            </div>
+        </div>
+
+        <div class="tabla-container">
+            <table id="tablaFiltrable" class="table table-striped table-hover align-middle">
+                <thead>
+                    <!-- Encabezado principal con color -->
+                    <tr class="encabezado-principal">
+                        <th style="min-width:140px;">ID</th>
+                        <th style="min-width:200px;">Cliente</th>
+                        <th style="min-width:160px;">Ciudad</th>
+                        <th style="min-width:160px;">Fecha</th>
+                        <th style="min-width:160px;">Estado</th>
+                    </tr>
+                    <!-- Fila con inputs para filtrar por columna -->
+                    <tr class="filtros">
+                        <th>
+                            <input type="text" class="form-control form-control-sm" placeholder="Filtrar ID" aria-label="Filtrar ID">
+                        </th>
+                        <th>
+                            <input type="text" class="form-control form-control-sm" placeholder="Filtrar Cliente" aria-label="Filtrar Cliente">
+                        </th>
+                        <th>
+                            <input type="text" class="form-control form-control-sm" placeholder="Filtrar Ciudad" aria-label="Filtrar Ciudad">
+                        </th>
+                        <th>
+                            <input type="text" class="form-control form-control-sm" placeholder="AAAA-MM-DD" aria-label="Filtrar Fecha">
+                        </th>
+                        <th>
+                            <select class="form-select form-select-sm" aria-label="Filtrar Estado">
+                                <option value="">(Todos)</option>
+                                <option>Activo</option>
+                                <option>Pendiente</option>
+                                <option>Cerrado</option>
+                            </select>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Datos de ejemplo -->
+                    <tr>
+                        <td>1001</td>
+                        <td>Servimex SA</td>
+                        <td>Monterrey</td>
+                        <td>2025-12-01</td>
+                        <td>Activo</td>
+                    </tr>
+                    <tr>
+                        <td>1002</td>
+                        <td>Alpha Tech</td>
+                        <td>Guadalajara</td>
+                        <td>2025-12-03</td>
+                        <td>Pendiente</td>
+                    </tr>
+                    <tr>
+                        <td>1003</td>
+                        <td>Beta Solutions</td>
+                        <td>CDMX</td>
+                        <td>2025-12-05</td>
+                        <td>Cerrado</td>
+                    </tr>
+                    <tr>
+                        <td>1004</td>
+                        <td>Gamma Corp</td>
+                        <td>Puebla</td>
+                        <td>2025-12-07</td>
+                        <td>Activo</td>
+                    </tr>
+                    <tr>
+                        <td>1005</td>
+                        <td>Delta Systems</td>
+                        <td>Toluca</td>
+                        <td>2025-12-07</td>
+                        <td>Pendiente</td>
+                    </tr>
+                    <tr>
+                        <td>1006</td>
+                        <td>Omega Labs</td>
+                        <td>Querétaro</td>
+                        <td>2025-12-07</td>
+                        <td>Cerrado</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="text-muted small mt-2">
+            Consejo: Puedes combinar varios filtros a la vez. La tabla alterna colores en filas pares/impares gracias a <code>.table-striped</code>.
+        </p>
+    </div>
+
+    <!-- Bootstrap 5.3.8 JS (bundle). Sin integrity para evitar bloqueo si el hash cambia -->
+    <script src="~/js BT/bootstrap.bundle.min.js"></script>
+    <!-- Lógica de filtrado -->
+    <script>
+        // Normaliza texto: minúsculas + sin acentos/diacríticos
+        function normaliza(txt) {
+          return (txt ?? "")
+            .toString()
+            .toLowerCase()
+            .normalize("NFD")            // separa base + diacríticos
+            .replace(/[\u0300-\u036f]/g, ""); // elimina diacríticos (compatible ampliamente)
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+          const tabla = document.getElementById("tablaFiltrable");
+          const filtrosRow = tabla.querySelector("thead tr.filtros");
+          const inputs = Array.from(filtrosRow.querySelectorAll("input, select"));
+          const tbody = tabla.querySelector("tbody");
+          const filas = Array.from(tbody.querySelectorAll("tr"));
+          const btnLimpiar = document.getElementById("btnLimpiar");
+          const contador = document.getElementById("contadorResultados");
+
+          // Estado de filtros
+          const filtros = inputs.map(() => "");
+
+          // Aplica filtrado cada vez que cambia un input/select
+          inputs.forEach((input, colIdx) => {
+            const handler = () => {
+              filtros[colIdx] = input.value || "";
+              aplicaFiltro();
+            };
+            input.addEventListener("input", handler);
+            input.addEventListener("change", handler);
+          });
+
+          btnLimpiar.addEventListener("click", () => {
+            inputs.forEach(el => {
+              if (el.tagName === "SELECT") el.value = "";
+              else el.value = "";
+            });
+            // Reset del estado y re-aplicación
+            filtros.forEach((_, i) => filtros[i] = "");
+            aplicaFiltro();
+          });
+
+          function aplicaFiltro() {
+            let visibles = 0;
+
+            filas.forEach(row => {
+              const celdas = Array.from(row.children);
+              let visible = true;
+
+              // Limpia resaltado anterior
+              celdas.forEach(cell => cell.classList.remove("match-highlight"));
+
+              for (let i = 0; i < celdas.length; i++) {
+                const filtro = normaliza(filtros[i]);
+                if (!filtro) continue; // sin filtro para esa columna
+
+                const valorCelda = normaliza(celdas[i].textContent);
+
+                // Lógica del select "Estado": coincidencia exacta si hay valor
+                const esSelect = inputs[i].tagName === "SELECT";
+                const coincide = esSelect ? (valorCelda === filtro) : valorCelda.includes(filtro);
+
+                if (!coincide) {
+                  visible = false;
+                  break; // ya no muestra la fila
+                } else {
+                  // Resalta celdas que coinciden
+                  celdas[i].classList.add("match-highlight");
+                }
+              }
+
+              row.style.display = visible ? "" : "none";
+              if (visible) visibles++;
+            });
+
+            contador.textContent = `Mostrando ${visibles} de ${filas.length}`;
+          }
+
+          // Primera cuenta al cargar
+          aplicaFiltro();
+        });
+    </script>
+</body>
+</html>

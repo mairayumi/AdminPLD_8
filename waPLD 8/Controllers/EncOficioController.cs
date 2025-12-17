@@ -2,14 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using waPLD_8.Models.Shared;
-using waPLD_8.Models.Bitacora;
-using waPLD_8.Extesion;
+using waPLD.Models.Shared;
+using waPLD.Models.Bitacora;
+using waPLD.Extesion;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-
-namespace waPLD_8.Controllers
+namespace waPLD.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -17,12 +16,12 @@ namespace waPLD_8.Controllers
     {
         // GET: api/<OficiosController>
         [HttpGet]
-        public IActionResult Get(int Id, int Año, int Tipo, int PagAct)
+        public IActionResult Get(int Id,int Año,int Tipo,int PagAct)
         {
             Respuesta respuesta = new Respuesta();
             try
             {
-                EncOficio oficios = new EncOficio();
+                EncOficio oficios= new EncOficio();
                 oficios.lOFD_Id = Id;
                 oficios.lOFD_Año = Año;
                 oficios.lOFD_Tipo = Tipo;

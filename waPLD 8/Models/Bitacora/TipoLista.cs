@@ -1,6 +1,9 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
 
-namespace waPLD_8.Models.Bitacora
+namespace waPLD.Models.Bitacora
 {
     public class TipoLista
     {

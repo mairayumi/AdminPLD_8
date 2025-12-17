@@ -1,14 +1,13 @@
 ﻿using System.ComponentModel;
 
-namespace waPLD_8.Models.Bitacora
+namespace waPLD.Models.Bitacora
 {
     public class TipoSolicitud
     {
         [DisplayName("No TipoSolicitud")]
-        public int cTIS_Id { get; set; }
+        public int cTIS_Id {  get; set; }
         [DisplayName("Descripcion")]
-        public string cTIS_Descripcion { get; set; }
+        public string cTIS_Descripcion {  get; set; }
 
     }
 }
-

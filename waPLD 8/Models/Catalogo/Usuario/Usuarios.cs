@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace waPLD_8.Models.Catalogo.Usuario
+namespace waPLD.Models.Catalogo.Usuario
 {
     public class Usuarios : IdentityUser
     {

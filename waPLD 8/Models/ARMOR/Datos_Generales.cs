@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Migrations.Internal;
+using Newtonsoft.Json.Linq;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
-namespace waPLD_8.Models.ARMOR
+namespace waPLD.Models.ARMOR
 {
-
     public partial class Datos_Generales
     {
         //[Required(ErrorMessage = "El valor :token es requerido")]

@@ -2,13 +2,18 @@
 @using wsPLD_8.Models.Shared
 @using wsPLD_8.Models.Catalogos;
 @inject Aplicacion<int> _aplicacion
+@inject IHttpContextAccessor _HttpContextAccessor
 @model Graficas
 @{
-    
+    string sAplicacion = _HttpContextAccessor.HttpContext.Session.GetString("Aplicacion");
+    if (sAplicacion != null)
+    {
+        _aplicacion = _aplicacion.Deserializar(sAplicacion);
+    }
 }
-<link rel="stylesheet" href="~/dist/css/ionicons.min.css">
+<link rel="stylesheet" href="/dist/css/ionicons.min.css">
 <link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css"
+      href="/dist/css/apexcharts.css"
       integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0="
       crossorigin="anonymous" />
 

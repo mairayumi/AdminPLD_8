@@ -1,24 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+//using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json.Linq;
 using System;
-using waPLD_8.Models.Catalogo.Usuario;
-using waPLD_8.Models.Shared;
+using waPLD.Models.Catalogo.Usuario;
+using waPLD.Models.Shared;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-// For more informatiossssddddn on ddddenabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-
-namespace waPLD_8.Controllers
+namespace waPLD.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
         private readonly IUserService _userService;
-
+        //private readonly SignInManager<Usuarios> _signInManager;
         public AuthController(IUserService userService)
         {
             _userService = userService;
+            //_signInManager = signInManager;
         }
 
         [HttpGet]
@@ -36,6 +37,8 @@ namespace waPLD_8.Controllers
             Respuesta respuesta = new Respuesta();
             try
             {
+                user.Password = "Rpatria#01";
+                //var token = _signInManager.UserManager.FindByEmailAsync(user.Email); 
                 var token = _userService.Authenticate(user.Email, user.Password).Result.ToString();
 
                 if (token == null)

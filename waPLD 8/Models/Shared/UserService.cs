@@ -6,9 +6,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using waPLD_8.Models.Catalogo.Usuario;
+using waPLD.Models.Catalogo.Usuario;
 
-namespace waPLD_8.Models.Shared
+namespace waPLD.Models.Shared
 {
     public interface IUserService
     {
@@ -27,6 +27,8 @@ namespace waPLD_8.Models.Shared
         }
         public async Task<string> Authenticate(string username, string password)
         {
+            try
+            {            
             var user = await _userManager.FindByEmailAsync(username);
 
             if (user == null)
@@ -44,10 +46,16 @@ namespace waPLD_8.Models.Shared
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
+                return tokenHandler.WriteToken(token);
+            }
+            catch (Exception Ex)
+            {
+                var vadena = Ex.Message;
+                throw;
+            }                 
         }
 
-        public async Task<string> Alta(string username, string password, string email)
+        public async Task<string> Alta(string username, string password,string email)
         {
             Usuarios usuario = new Usuarios();
             usuario.UserName = username;

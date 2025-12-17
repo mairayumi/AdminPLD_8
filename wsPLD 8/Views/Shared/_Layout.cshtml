@@ -39,11 +39,11 @@
     <!-- Skip links will be dynamically added by accessibility.js -->
     <meta name="supported-color-schemes" content="light dark" />
    
-    <link rel="preload" href="~/dist/css/adminlte.css" as="style" />
-
+@*     <link rel="preload" href="/dist/css/adminlte.css" as="style" />
+ *@
     <!--begin::Fonts-->
     <link rel="stylesheet"
-          href="~/dist/css/index.css"
+          href="/dist/css/index.css"
           crossorigin="anonymous"
           media="print"
           onload="this.media='all'" />
@@ -51,13 +51,13 @@
 
     <!--begin::Third Party Plugin(OverlayScrollbars)-->
     <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/styles/overlayscrollbars.min.css"
+          href="/dist/css/overlayscrollbars.min.css"
           crossorigin="anonymous" />
     <!--end::Third Party Plugin(OverlayScrollbars)-->
 
     <!--begin::Third Party Plugin(Bootstrap Icons)-->
     <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+          href="/dist/css/bootstrap-icons.min.css"
           crossorigin="anonymous" />
     <!--end::Third Party Plugin(Bootstrap Icons)-->
  
@@ -65,7 +65,7 @@
     <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
 
     <!--begin::Required Plugin(AdminLTE)-->
-    <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
+    <link href="/dist/css/adminlte.min.css" rel="stylesheet" />
     
     <!--end::Required Plugin(AdminLTE)-->
 
@@ -94,7 +94,7 @@ Barra lateral colapsada: utilice esta clase .sidebar-expand-* .sidebar-mini .sid
                                 <!--begin::Brand Link-->
                                 <a href="./index.html" class="brand-link">
                                     <!--begin::Brand Image-->
-                                    <img src="~/dist/assets/img/logo-patriare.png"
+                                    <img src="/dist/assets/img/logo-patriare.png"
                                          alt="@_aplicacion.Name @_aplicacion.PostName Logo"
                                          class="brand-image opacity-75 shadow" />
                                     <!--end::Brand Image-->
@@ -129,7 +129,7 @@ Barra lateral colapsada: utilice esta clase .sidebar-expand-* .sidebar-mini .sid
                                 <a href="#" class="dropdown-item">
                                     <!-- Message Start -->
                                     <div class="media">
-                                        <img src="~/dist/assets/img/usr-@_aplicacion.UsrId-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                                        <img src="/dist/assets/img/usr-@_aplicacion.UsrId-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                                         <div class="media-body">
                                             <h3 class="dropdown-item-title">
                                                 Brad Diesel
@@ -145,7 +145,7 @@ Barra lateral colapsada: utilice esta clase .sidebar-expand-* .sidebar-mini .sid
                                 <a href="#" class="dropdown-item">
                                     <!-- Message Start -->
                                     <div class="media">
-                                        <img src="~/dist/assets/img/usr-8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                                        <img src="/dist/assets/img/usr-8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                                         <div class="media-body">
                                             <h3 class="dropdown-item-title">
                                                 John Pierce
@@ -161,7 +161,7 @@ Barra lateral colapsada: utilice esta clase .sidebar-expand-* .sidebar-mini .sid
                                 <a href="#" class="dropdown-item">
                                     <!-- Message Start -->
                                     <div class="media">
-                                        <img src="~/dist/assets/img/usr-3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                                        <img src="/dist/assets/img/usr-3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                                         <div class="media-body">
                                             <h3 class="dropdown-item-title">
                                                 Nora Silvester
@@ -233,7 +233,7 @@ Barra lateral colapsada: utilice esta clase .sidebar-expand-* .sidebar-mini .sid
                 <!--begin::Brand Link-->
                 <a href="./index.html" class="brand-link">
                     <!--begin::Brand Image-->
-                    <img src="~/dist/assets/img/logo-patriare-blanco.png"
+                    <img src="/dist/assets/img/logo-patriare-blanco.png"
                          alt="@_aplicacion.Name @_aplicacion.PostName Logo"
                          class="brand-image opacity-75 shadow" />
                     <!--end::Brand Image-->
@@ -387,17 +387,17 @@ Barra lateral colapsada: utilice esta clase .sidebar-expand-* .sidebar-mini .sid
     <!--end::App Wrapper-->
     <!--begin::Script-->
     <!--begin::Third Party Plugin(OverlayScrollbars)-->
-    <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js"
+    <script src="/dist/js/overlayscrollbars.browser.es6.min.js"
             crossorigin="anonymous"></script>
     <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
-    <script src="~/dist/js/popper.min.js"
+    <script src="/dist/js/popper.min.js"
             crossorigin="anonymous"></script>
     <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"
+    <script src="/dist/js/bootstrap.min.js"
             crossorigin="anonymous"></script>
     <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
-    <script src="~/dist/js/adminlte.js"></script>
-    <script src="~/dist/js/general.js"></script>
+    <script src="/dist/js/adminlte.js"></script>
+    <script src="/dist/js/general.js"></script>
     <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
     <script>
         const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';

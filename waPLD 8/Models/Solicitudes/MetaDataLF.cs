@@ -1,4 +1,4 @@
-﻿namespace waPLD_8.Models.Solicitudes
+﻿namespace waPLD.Models.Solicitudes
 {
     public class MetaDataLF
     {
@@ -11,10 +11,10 @@
         public string K_Carpeta { get; set; }
         public string K_Usuario_Correo { get; set; }
         public string PathCarpeta { get; set; }
-
-        public string U_Tipo_Reaseguro { get; set; }
-        public string S_IDReaseguro { get; set; }
-        public string U_Corredor { get; set; }
+    
+        public string U_Tipo_Reaseguro {  get; set; }
+        public string S_IDReaseguro {  get; set; }
+        public string U_Corredor {  get; set; }
         public string S_IDCorredor { get; set; }
         public string U_Cedente { get; set; }
         public string S_IDCedente { get; set; }
@@ -33,8 +33,8 @@
         public string S_Nombre_Original { get; set; }
         public string U_Año_Susc { get; set; }
 
-        public bool ParaProcesar { get; set; }
-        public string Razon { get; set; }
+        public bool ParaProcesar {  get; set; }
+        public string Razon {  get; set; }
 
         public string Plantilla { get; set; }
         public string U_Hoja_de_selección { get; set; }

@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace waPLD_8.Models.Shared
+namespace waPLD.Models.Shared
 {
-    public class ChartHub : Hub
+    public class ChartHub:Hub
     {
         // Método para enviar datos al cliente
         //public async Task SendChartData(List<double> data)

@@ -1,6 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 
-namespace waPLD_8.Models.Catalogo
+namespace waPLD.Models.Catalogo
 {
     public class BusquedaDetalle
     {
@@ -21,6 +22,6 @@ namespace waPLD_8.Models.Catalogo
         [DisplayName("Tipo de Lista Negra")]
         public string aBSD_lista { get; set; }
         [DisplayName("Comentario")]
-        public string aBSD_comentarios { get; set; }
+        public string aBSD_comentarios { get; set; }        
     }
 }

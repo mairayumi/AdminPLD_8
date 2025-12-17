@@ -1,12 +1,14 @@
-﻿using waPLD_8.Models.Catalogo.Usuario;
-using waPLD_8.Models.Shared;
+﻿using waPLD.Models.Catalogo.Usuario;
+using waPLD.Models.Shared;
 using Microsoft.AspNetCore.Mvc;
-using waPLD_8.Models.Bitacora;
-using waPLD_8.Extesion;
+using waPLD.Models.Bitacora;
+using waPLD.Extesion;
 using Microsoft.AspNetCore.Authorization;
 using System;
 
-namespace waPLD_8.Controllers
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace waPLD.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -18,7 +20,7 @@ namespace waPLD_8.Controllers
         {
             Respuesta respuesta = new Respuesta();
             try
-            {
+            {                
                 TicketARMOR ticketARMOR = new TicketARMOR();
                 //ticketARMOR.NoPagina = PagAct;
                 ticketARMOR.cTLS_Id = cTLS_Id;

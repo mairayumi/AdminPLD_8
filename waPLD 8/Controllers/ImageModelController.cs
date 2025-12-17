@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using waPLD_8.Models.Shared;
-using waPLD_8.Extesion;
-using waPLD_8.Models.Bitacora;
+using waPLD.Models.Shared;
+using waPLD.Extesion;
+using waPLD.Models.Bitacora;
 
-namespace waPLD_8.Controllers
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace waPLD.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

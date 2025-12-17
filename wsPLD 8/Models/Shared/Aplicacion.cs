@@ -54,7 +54,7 @@ namespace wsPLD_8.Models.Shared
                 ,new MenuApp {titulo= "PLD Calendar",icon = "fa-chart-pie" ,hRef="/Calendar/Index"}
                 ,new MenuApp {titulo= "PLD Salud",icon = "fa-tree" ,hRef="https://adsarmpolonia01.rpa.gpv.mx/#/login", target="_blank"}
                 ,new MenuApp {titulo= "PLD Seguros",icon = "fa-edit" ,hRef="https://adswarpolonia.rpa.gpv.mx/#/login", target="_blank"}
-                ,new MenuApp {titulo= "PLD Patria",icon = "fa-table" ,hRef="https://adsarmpolonia02.gse.gpv.mx/#/login", target="_blank"}};
+                ,new MenuApp {titulo= "PLD Patria",icon = "fa-table" ,hRef="https:Home/Privacy", target="_blank"}};
             }
         }
         void LoadCatalogo(int TipCatalogo)

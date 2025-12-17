@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using waPLD_8.Models.Catalogo;
-using waPLD_8.Models.Shared;
-using waPLD_8.Extesion;
+using waPLD.Models.Catalogo;
+using waPLD.Models.Shared;
+using waPLD.Extesion;
 using System;
 
-namespace waPLD_8.Controllers
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace waPLD.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -18,7 +20,7 @@ namespace waPLD_8.Controllers
             try
             {
                 Busqueda busqueda = new Busqueda();
-                busqueda.cBSQ_Persona = sBusqueda;
+                busqueda.cBSQ_Persona= sBusqueda;
                 busqueda.PagAct = PagAct;
                 respuesta = busqueda.Read();
             }

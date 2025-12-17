@@ -1,17 +1,14 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore.SqlServer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
-using waPLD_8.Models.Shared;
-using waPLD_8.Services;
+using waPLD.Models.Shared;
 
 namespace waPLD_8
 {
@@ -22,6 +19,7 @@ namespace waPLD_8
             Configuration = configuration;
         }
 
+        // This method gets called by the runtime. Use this method to add services to the container.
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -44,7 +42,7 @@ namespace waPLD_8
             //});
 
 
-            ////// Registrar el servicio de envío de datos
+            ////// Registrar el servicio de env o de datos
             ////services.AddSingleton<ChartDataService>();
             ////services.AddHostedService<ChartDataService>(provider => provider.GetRequiredService<ChartDataService>());
             services.AddAuthorization();
@@ -52,11 +50,12 @@ namespace waPLD_8
             string DataSource = "ADSArmor02.rpa.gpv.mx";
             string InitialCatalog = "Accesos";
 
-            // Configuración de la base de datos e Identity
+            // Configuraci n de la base de datos e Identity
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DBTicketArmor").Replace("@DataSource", DataSource).Replace("@InitialCatalog", InitialCatalog)));
 
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>()
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
             // Configurar JWT

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using waPLD_8.Models.Shared;
-using waPLD_8.Models.ARMOR;
-using waPLD_8.Extesion;
+using waPLD.Models.Shared;
+using waPLD.Models.ARMOR;
+using waPLD.Extesion;
 using System.Drawing;
 using System.IO.Pipelines;
 using Microsoft.AspNetCore.Authorization;
@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace waPLD_8.Controllers
+namespace waPLD.Controllers
 {
 
     [Route("api/[controller]")]
@@ -37,7 +37,7 @@ namespace waPLD_8.Controllers
             Respuesta respuesta = new Respuesta();
             try
             {
-                respuesta = value.CreateLocal("adswPolonia", "dbKYC_TP_" + DBName);
+                respuesta = value.CreateLocal("adswPolonia", "dbKYC_TP_"+DBName);
             }
             catch (Exception ex)
             {

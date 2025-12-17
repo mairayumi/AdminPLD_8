@@ -1,16 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using waPLD_8.Models.LexisNexis;
-using waPLD_8.Models.Shared;
-using Renci.SshNet.Async;
-using System.Threading.Tasks;
-using System.Text;
 using Renci.SshNet;
-using ConnectionInfo = Renci.SshNet.ConnectionInfo;
+using System;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
+using waPLD.Models.LexisNexis;
+using waPLD.Models.Shared;
 
-namespace waPLD_8.Controllers
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace waPLD.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using waPLD_8.Models.Shared;
-using waPLD_8.Models.ARMOR;
-using waPLD_8.Extesion;
+using waPLD.Models.Shared;
+using waPLD.Models.ARMOR;
+using waPLD.Extesion;
 using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
 
-namespace waPLD_8.Controllers
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace waPLD.Controllers
 {
     //[Authorize(Roles = "Admin")]
     [Route("api/[controller]")]

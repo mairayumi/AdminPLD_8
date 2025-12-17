@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace waPLD_8.Models.Shared
+namespace waPLD.Models.Shared
 {
     public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
@@ -12,3 +12,4 @@ namespace waPLD_8.Models.Shared
         }
     }
 }
+

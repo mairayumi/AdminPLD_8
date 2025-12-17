@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using waPLD_8.Models.Shared;
-using waPLD_8.Models.Catalogo.Usuario;
-using waPLD_8.Extesion;
-namespace waPLD_8.Controllers
+using waPLD.Models.Shared;
+using waPLD.Models.Catalogo.Usuario;
+using waPLD.Extesion;
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace waPLD.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -16,7 +18,7 @@ namespace waPLD_8.Controllers
             Respuesta respuesta = new Respuesta();
             try
             {
-                Usuarios usuarios = new Usuarios();
+                Usuarios usuarios= new Usuarios();
                 usuarios.UsrId = id;
                 respuesta = usuarios.Read();
             }

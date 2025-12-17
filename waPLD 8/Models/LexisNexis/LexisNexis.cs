@@ -1,4 +1,4 @@
-﻿namespace waPLD_8.Models.LexisNexis
+﻿namespace waPLD.Models.LexisNexis
 {
     public class LexisNexis
     {   //  wco.lexisnexisrisk.com
@@ -20,4 +20,3 @@
 
     }
 }
-

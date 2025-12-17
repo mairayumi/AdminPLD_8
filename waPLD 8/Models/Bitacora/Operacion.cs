@@ -1,4 +1,4 @@
-﻿namespace waPLD_8.Models.Bitacora
+﻿namespace waPLD.Models.Bitacora
 {
     public class Operacion
     {

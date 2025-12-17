@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace waPLD_8.Models.Catalogo.Usuario
+namespace waPLD.Models.Catalogo.Usuario
 {
     public class Direccion
     {
@@ -27,5 +27,3 @@ namespace waPLD_8.Models.Catalogo.Usuario
         public string? SubTitulo { get; set; }
     }
 }
-
-

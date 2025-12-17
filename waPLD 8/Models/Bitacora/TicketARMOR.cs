@@ -1,7 +1,9 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace waPLD_8.Models.Bitacora
+namespace waPLD.Models.Bitacora
 {
     public class TicketARMOR
     {
@@ -30,7 +32,7 @@ namespace waPLD_8.Models.Bitacora
 
         [DisplayName("Asunto")]
         [Required(ErrorMessage = "El Asunto es obligatorio")]
-        public string cTKA_Asunto { get; set; }
+        public string? cTKA_Asunto { get; set; }
         [DisplayName("Id Tipo de Solicitud")]
         public int cTIS_Id { get; set; }
 
@@ -42,8 +44,8 @@ namespace waPLD_8.Models.Bitacora
         public ICollection<EstadoSolicitud> estadoSolicitud { get; set; }
         [DisplayName("Estatus de Spot")]
         [Required(ErrorMessage = "El estatus de SPOT es obligatorio")]
-        public string cTKA_EstatusSpot { get; set; }
-
+        public string? cTKA_EstatusSpot { get; set; }
+        
         [DisplayName("Actividades de GPV")]
         public ICollection<TKAxActividad> actividades { get; set; }
 
@@ -66,7 +68,7 @@ namespace waPLD_8.Models.Bitacora
         public string? cTKA_SeccionSubAplicacion { get; set; }
         [DisplayName("Usuario Afectado")]
         [Required(ErrorMessage = "El Usuario afectado es obligatorio")]
-        public string cTKA_UsuarioAfectado { get; set; }
+        public string? cTKA_UsuarioAfectado { get; set; }
         [DisplayName("Observaciones")]
         public string? cTKA_Observaciones { get; set; }
 

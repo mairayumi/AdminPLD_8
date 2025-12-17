@@ -1,4 +1,6 @@
-﻿namespace waPLD_8.Models.Bitacora
+﻿using System.Collections.Generic;
+
+namespace waPLD.Models.Bitacora
 {
     public class Graficas
     {

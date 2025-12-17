@@ -4,9 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Runtime.Serialization;
 
-namespace waPLD_8.Models.ARMOR
+namespace waPLD.Models.ARMOR
 {
-
     public partial class Operaciones
     {
         //[Required(ErrorMessage = "El valor :identificadoroperacion es requerido")]

@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
-using waPLD_8.Extesion;
-using waPLD_8.Models.Bitacora;
-using waPLD_8.Models.Shared;
+using waPLD.Extesion;
+using waPLD.Models.Bitacora;
+using waPLD.Models.Shared;
 
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace waPLD_8.Controllers
+namespace waPLD.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -81,7 +82,7 @@ namespace waPLD_8.Controllers
 
         // DELETE api/<TKAxActividadController>/5
         [HttpDelete]
-        public IActionResult Delete(int cTLS_Id, int cTKA_Id, int rTKA_Id)
+        public IActionResult Delete(int cTLS_Id, int cTKA_Id,int rTKA_Id)
         {
             Respuesta respuesta = new Respuesta();
             try

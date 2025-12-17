@@ -1,7 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore.Migrations.Internal;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
-namespace waPLD_8.Models.ARMOR
+namespace waPLD.Models.ARMOR
 {
     public partial class Datos_Domicilios
     {
@@ -70,6 +73,6 @@ namespace waPLD_8.Models.ARMOR
 
         [DataMember]
         public int? Esprod { get; set; }
-
+        
     }
 }
